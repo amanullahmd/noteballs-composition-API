@@ -4,13 +4,13 @@ import ViewNotes from '@/view/ViewNotes.vue'
 import ViewStats from '@/view/ViewStats.vue'
 
 const routes = [
-    { path: '/', component: ViewNotes },
-    { path: '/stats', component: ViewStats },
-  ]
-  
-  const router = createRouter({
-    history: createMemoryHistory(),
-    routes,
-  })
+  { path: '/', name: 'home', component: ViewNotes },
+  { path: '/stats', name: 'stats', component: ViewStats }
+]
 
-  export default router
+const router = createRouter({
+  history: createMemoryHistory(),
+  routes: routes
+})
+
+export default router
