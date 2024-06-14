@@ -3,30 +3,57 @@
     <div class="my-2">
       <div class="field card">
         <div class="control">
-          <textarea class="textarea" placeholder="Textarea"></textarea>
+          <textarea
+            class="textarea"
+            v-model="newNote"
+            ref="newNoteRef"
+            placeholder="Add new note"
+          ></textarea>
         </div>
       </div>
     </div>
 
     <div class="field is-grouped">
       <div class="control">
-        <button class="button is-link">Add New Note</button>
+        <button class="button is-link" :disabled="!newNote" @click="addNote">Add New Note</button>
       </div>
     </div>
 
-    <div v-for="card in 3" class="card">
-      <div class="card-content">
-        <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-          <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-          <br />
-          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-        </div>
-      </div>
-      <footer class="card-footer">
-        <a href="#" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item">Delete</a>
-      </footer>
-    </div>
+    <Note v-for="note in notes" :key="note.id" :note="note" @deleteNote="handlerDeleteNote" />
   </div>
 </template>
+<script setup>
+import { ref } from 'vue'
+import Note from '@/components/Notes/Note.vue'
+const newNote = ref('')
+const newNoteRef = ref(null)
+
+const notes = ref([
+  {
+    id: 'id1',
+    content:
+      ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.'
+  },
+  {
+    id: 'id2',
+    content: ' Lorem ipsum dolor sit amet, consectetur woo!'
+  }
+])
+
+const addNote = () => {
+  let id = new Date().getTime().toString()
+
+  let note = {
+    id,
+    content: newNote.value
+  }
+
+  notes.value.unshift(note)
+  newNote.value = ''
+  newNoteRef.value.focus()
+}
+
+const handlerDeleteNote = (id)=> {
+    console.log("hi there " + id);
+}
+</script>
