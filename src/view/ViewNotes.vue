@@ -53,7 +53,8 @@ const addNote = () => {
   newNoteRef.value.focus()
 }
 
-const handlerDeleteNote = (id)=> {
-    console.log("hi there " + id);
+const handlerDeleteNote = (noteId)=> {
+    notes.value = notes.value.filter(note => note.id !== noteId);
 }
+
 </script>
