@@ -4,9 +4,9 @@
       <div class="content">
         {{ note.content }}
         <div class="has-text-right has-text-grey-light mt-2">
-            <small>
-                {{charactersLength}}
-            </small>
+          <small>
+            {{ charactersLength }}
+          </small>
         </div>
       </div>
     </div>
@@ -18,8 +18,10 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed } from 'vue'
+import { useStoreNotes } from '@/stores/storeNotes'
 
+const storeNotes = useStoreNotes()
 
 const props = defineProps({
   note: {
@@ -28,17 +30,12 @@ const props = defineProps({
   }
 })
 
-
-
-const charactersLength = computed(()=> {
-    let description = props.note.content.length > 1 ? 'characters': 'character'
-    return `${props.note.content.length} ${description}`
+const charactersLength = computed(() => {
+  let description = props.note.content.length > 1 ? 'characters' : 'character'
+  return `${props.note.content.length} ${description}`
 })
 
-const emit = defineEmits(['deleteNote'])
-
-const deleteNote = ()=> {
-    emit('deleteNote', props.note.id)
+const deleteNote = () => {
+  storeNotes.deleteNote(props.note.id)
 }
-
 </script>
