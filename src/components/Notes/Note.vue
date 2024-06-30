@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card is-active">
     <div class="card-content">
       <div class="content">
         {{ note.content }}
@@ -15,16 +15,20 @@
         >Edit</RouterLink
       >
 
-      <a href="#" class="card-footer-item" @click.prevent="deleteNote">Delete</a>
+      <a href="#" class="card-footer-item" @click.prevent="modals.deleteModal = true">Delete</a>
     </footer>
+    <ModalDeleteNote v-model="modals.deleteModal" v-if="modals.deleteModal" :noteId="note.id" />
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useStoreNotes } from '@/stores/storeNotes'
+import { computed, reactive, ref } from 'vue'
 
-const storeNotes = useStoreNotes()
+import ModalDeleteNote from '@/components/Notes/ModalDeleteNote.vue'
+
+const modals = reactive({
+  deleteModal: false
+})
 
 const props = defineProps({
   note: {
@@ -37,8 +41,4 @@ const charactersLength = computed(() => {
   let description = props.note.content.length > 1 ? 'characters' : 'character'
   return `${props.note.content.length} ${description}`
 })
-
-const deleteNote = () => {
-  storeNotes.deleteNote(props.note.id)
-}
 </script>
