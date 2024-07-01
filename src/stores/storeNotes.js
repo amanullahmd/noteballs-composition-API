@@ -20,17 +20,6 @@ export const useStoreNotes = defineStore('StoreNotes', {
   },
   actions: {
     async getNotes() {
-      /* const querySnapshot = await getDocs(collection(db, 'notes'))
-      querySnapshot.forEach((doc) => {
-
-        let note = {
-          id: doc.id,
-          content: doc.data().content
-        }
-        this.notes.push(note)
-        console.log('note => ', note)
-      }) */
-
       onSnapshot(collection(db, 'notes'), (querySnapshot) => {
         let notes = []
         querySnapshot.forEach((doc) => {
@@ -39,13 +28,10 @@ export const useStoreNotes = defineStore('StoreNotes', {
             content: doc.data().content
           }
           notes.push(note)
-        });
+        })
 
         this.notes = notes
-        
-      });
-
-
+      })
     },
     addNote(newNotesContent) {
       let id = new Date().getTime().toString()
