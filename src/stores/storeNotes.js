@@ -5,17 +5,7 @@ import { db } from '@/js/firebase'
 export const useStoreNotes = defineStore('StoreNotes', {
   state: () => {
     return {
-      notes: [
-        /* {
-          id: 'id1',
-          content:
-            ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.'
-        },
-        {
-          id: 'id2',
-          content: ' Lorem ipsum dolor sit amet, consectetur woo!'
-        } */
-      ]
+      notes: []
     }
   },
   actions: {
