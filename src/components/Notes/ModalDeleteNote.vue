@@ -47,7 +47,6 @@ const closeModal = () => {
 onClickOutside(clickOutsideTarget, closeModal)
 
 const handleKeyboard = (e) => {
-  console.log('close modal')
   if (e.key === 'Escape') closeModal()
 }
 
