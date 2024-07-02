@@ -3,8 +3,9 @@
     <div class="card-content">
       <div class="content">
         {{ note.content }}
-        <div class="has-text-right has-text-grey-light mt-2">
-          <small>
+        <div class="columns has-text-grey-light mt-2">
+          <small class="column"> {{ formattedDate }} </small>
+          <small class="column has-text-right">
             {{ charactersLength }}
           </small>
         </div>
@@ -14,7 +15,6 @@
       <RouterLink :to="{ name: 'editNote', params: { id: note.id } }" class="card-footer-item"
         >Edit</RouterLink
       >
-
       <a href="#" class="card-footer-item" @click.prevent="modals.deleteModal = true">Delete</a>
     </footer>
     <ModalDeleteNote v-model="modals.deleteModal" v-if="modals.deleteModal" :noteId="note.id" />
@@ -22,8 +22,8 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref } from 'vue'
-
+import { computed, reactive } from 'vue'
+import { useDateFormat } from '@vueuse/core'
 import ModalDeleteNote from '@/components/Notes/ModalDeleteNote.vue'
 
 const modals = reactive({
@@ -35,6 +35,12 @@ const props = defineProps({
     type: Object,
     require: true
   }
+})
+
+const formattedDate = computed(() => {
+  let date = new Date(parseInt(props.note.date))
+  const formatted = useDateFormat(date, 'DD-MM-YYYY HH:mm')
+  return formatted.value
 })
 
 const charactersLength = computed(() => {

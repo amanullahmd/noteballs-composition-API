@@ -23,7 +23,7 @@ noteContent.value = noteStore.getNoteContent(route.params.id)
 
 
 const updateNoteHandler = () => {
-  noteStore.updateNote(route.params.id, noteContent)
+  noteStore.updateNote(route.params.id, noteContent.value)
   router.push({name: 'home'})
 }
 
