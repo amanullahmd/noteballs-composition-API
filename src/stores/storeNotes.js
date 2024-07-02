@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { collection, getDocs, onSnapshot, doc, setDoc } from 'firebase/firestore'
+import { collection, onSnapshot, doc, setDoc, orderBy, query } from 'firebase/firestore'
 import { db } from '@/js/firebase'
 
 export const useStoreNotes = defineStore('StoreNotes', {
