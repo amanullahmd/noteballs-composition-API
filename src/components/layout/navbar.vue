@@ -22,6 +22,7 @@
 
       <div id="navbarBasicExample" class="navbar-menu" :class="{ 'is-active': showMobileNav }">
         <div class="navbar-end">
+          <h4 class="mt-4 ml-3" v-if="storeAuth.user.id">{{ storeAuth.user.email }}</h4>
           <router-link
             @click="showMobileNav = false"
             active-class="is-active"
@@ -36,7 +37,9 @@
             to="/stats"
             >Stats</router-link
           >
-          <button @click="handleSignout" class="button is-small is-info">Log out</button>
+          <button v-if="storeAuth.user.id" @click="handleSignout" class="button is-small is-info">
+            Log out
+          </button>
         </div>
       </div>
     </div>

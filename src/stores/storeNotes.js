@@ -10,8 +10,12 @@ import {
   addDoc
 } from 'firebase/firestore'
 import { db } from '@/js/firebase'
+import { useStoreAuth } from '@/stores/storeAuth'
 
-export const useStoreNotes = defineStore('StoreNotes', {
+let noteCollectionRef
+let getNotesSnapshot
+
+export const useStoreNotes = defineStore('storeNotes', {
   state: () => {
     return {
       notes: [],
@@ -19,10 +23,16 @@ export const useStoreNotes = defineStore('StoreNotes', {
     }
   },
   actions: {
+    init() {
+      const storeAuth = useStoreAuth()
+      noteCollectionRef = collection(db, 'users', storeAuth.user.id, 'notes')
+      this.getNotes()
+    },
     async getNotes() {
       this.loadingBar = true
-      const q = query(collection(db, 'notes'), orderBy('date', 'desc'))
-      onSnapshot(q, (querySnapshot) => {
+      const q = query(noteCollectionRef, orderBy('date', 'desc'))
+
+      getNotesSnapshot = onSnapshot(q, (querySnapshot) => {
         let notes = []
         querySnapshot.forEach((doc) => {
           let note = {
@@ -37,22 +47,26 @@ export const useStoreNotes = defineStore('StoreNotes', {
         this.loadingBar = false
       })
     },
+    clearNotes() {
+      this.notes = []
+      if (getNotesSnapshot) getNotesSnapshot() // unsubscrive from any active listener
+    },
     async addNote(newNotesContent) {
       let date = new Date().getTime().toString()
-      await addDoc(collection(db, 'notes'), {
+      await addDoc(noteCollectionRef, {
         date,
         content: newNotesContent
       })
     },
     async deleteNote(deleteNoteId) {
       try {
-        await deleteDoc(doc(db, 'notes', deleteNoteId))
+        await deleteDoc(doc(noteCollectionRef, deleteNoteId))
       } catch (error) {
         console.error('Error deleting note: ', error)
       }
     },
     async updateNote(id, content) {
-      await updateDoc(doc(db, 'notes', id), {
+      await updateDoc(doc(noteCollectionRef, id), {
         content: content
       })
     }
