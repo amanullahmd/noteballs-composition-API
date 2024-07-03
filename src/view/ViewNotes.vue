@@ -23,17 +23,20 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Note from '@/components/Notes/Note.vue'
 import AddEditNote from '@/components/Notes/AddEditNote.vue'
 import { useWatchCharacters } from '@/use/useWatchCharacters'
-
 import { useStoreNotes } from '@/stores/storeNotes'
 
 const newNote = ref('')
 const addEditNoteRef = ref(null)
 
 const storeNotes = useStoreNotes()
+
+onMounted(() => {
+  storeNotes.getNotes()
+})
 
 const addNote = () => {
   storeNotes.addNote(newNote.value)

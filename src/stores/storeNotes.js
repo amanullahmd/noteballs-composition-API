@@ -30,7 +30,6 @@ export const useStoreNotes = defineStore('StoreNotes', {
             date: doc.data().date,
             content: doc.data().content
           }
-          console.log(note);
           notes.push(note)
         })
 

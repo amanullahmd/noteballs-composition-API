@@ -6,14 +6,15 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted } from 'vue'
 import navbar from './components/layout/navbar.vue'
-import { useStoreNotes } from './stores/storeNotes';
 
-const storeNotes = useStoreNotes()
+import { useStoreAuth } from '@/stores/storeAuth'
 
-onMounted(()=> {
-  storeNotes.getNotes()
+const storeAuth = useStoreAuth()
+
+onMounted(() => {
+  storeAuth.init()
 })
 </script>
 

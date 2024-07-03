@@ -22,8 +22,21 @@
 
       <div id="navbarBasicExample" class="navbar-menu" :class="{ 'is-active': showMobileNav }">
         <div class="navbar-end">
-          <router-link @click="showMobileNav = false" active-class="is-active" class="navbar-item" to="/">Notes</router-link>
-          <router-link @click="showMobileNav = false" active-class="is-active" class="navbar-item" to="/stats">Stats</router-link>
+          <router-link
+            @click="showMobileNav = false"
+            active-class="is-active"
+            class="navbar-item"
+            to="/"
+            >Notes</router-link
+          >
+          <router-link
+            @click="showMobileNav = false"
+            active-class="is-active"
+            class="navbar-item"
+            to="/stats"
+            >Stats</router-link
+          >
+          <button @click="handleSignout" class="button is-small is-info">Log out</button>
         </div>
       </div>
     </div>
@@ -32,13 +45,21 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import { useStoreAuth } from '@/stores/storeAuth'
+
+const storeAuth = useStoreAuth()
 
 const showMobileNav = ref(false)
+
+const handleSignout = () => {
+  storeAuth.userSignOUt()
+  showMobileNav.value = false
+}
 </script>
 
 <style>
-@media (max-width: 1023px){
-  .navbar-menu{
+@media (max-width: 1023px) {
+  .navbar-menu {
     position: absolute;
     left: 0;
     width: 100%;
