@@ -45,6 +45,8 @@ export const useStoreNotes = defineStore('storeNotes', {
 
         this.notes = notes
         this.loadingBar = false
+      }, error => {
+        //console.log("Error msg: " + error.message);
       })
     },
     clearNotes() {

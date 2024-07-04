@@ -59,10 +59,10 @@ export const useStoreAuth = defineStore('storeAuth', {
     userSignOUt() {
       signOut(auth)
         .then(() => {
-          console.log('user has been sign out!')
+          //console.log('user has been sign out!')
         })
         .catch((error) => {
-          console.log(error.message)
+          //console.log(error.message)
         })
     }
   }

@@ -69,7 +69,6 @@ const onSubmit = () => {
     alert('hi ther')
   } else {
     if (register.value) {
-      console.log('Register new user ')
       storeAuth.registerUser(credentials)
     } else {
       storeAuth.userLogin(credentials)
