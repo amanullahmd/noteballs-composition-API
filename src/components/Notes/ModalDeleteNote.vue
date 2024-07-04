@@ -7,7 +7,7 @@
         <button @click="closeModal" class="delete" aria-label="close"></button>
       </header>
       <section class="modal-card-body">
-        Are you sure you want to delete this note? {{ noteId }} 
+        Are you sure you want to delete this note?
       </section>
       <footer class="modal-card-foot">
         <div class="buttons">
