@@ -1,14 +1,17 @@
-# noteballs
+# Better Noteballs
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+A complete CRUD operation project using vue.js 3 composition API, Firebase auth, Firestore and Pinia for state management. 
 
 ## Customize configuration
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Add .env file on project root and add these variable.
+
+VITE_APIKEY=
+VITE_AUTHDOMAIN=
+VITE_PROJECTID=
+VITE_STORAGEBUCKET=
+VITE_MESSAGINGsENDERID=
+VITE_APPID=
 
 ## Project Setup
 
